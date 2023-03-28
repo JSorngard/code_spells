@@ -169,6 +169,28 @@ macro_rules! colloportus {
     };
 }
 
+/// Leaks the input. The data is still there, you just can't see it!
+/// # Examples
+/// ```no_run
+/// # use spellrs::evanesco;
+/// let ostrich = vec![5; 100];
+/// // What do you have there?
+/// evanesco!(ostrich);
+/// // A smoothie..?
+/// ```
+/// ```compile_fail
+/// # use spellrs::evanesco;
+/// let a = vec![5; 100];
+/// evanesco!(a);
+/// println!("{a:?}");
+/// ```
+#[macro_export]
+macro_rules! evanesco {
+    ($item:expr) => {
+        ::std::mem::drop(::std::boxed::Box::new($item).leak())
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
