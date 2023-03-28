@@ -24,22 +24,6 @@ macro_rules! obliviate {
     };
 }
 
-/// Drops the given variable.
-#[macro_export]
-macro_rules! expelliarmus {
-    ($item:ident) => {
-        ::std::mem::drop($item)
-    };
-}
-
-/// Drops the given variable.
-#[macro_export]
-macro_rules! evanesco {
-    ($item:ident) => {
-        ::std::mem::drop($item)
-    };
-}
-
 /// Constructs the given type using either the `default()`
 /// or `new(<optional args>)` functions.
 /// Calling it with `erecto!(type)` results in the former, while
@@ -119,13 +103,9 @@ mod tests {
     use super::*;
 
     #[test]
-    fn practice_obliviate_and_friends() {
+    fn practice_obliviate() {
         let x = 5;
         obliviate!(x);
-        let y = 5;
-        evanesco!(y);
-        let z = 5;
-        expelliarmus!(z);
     }
 
     #[test]
