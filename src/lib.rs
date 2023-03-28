@@ -106,6 +106,23 @@ macro_rules! immobulus {
     };
 }
 
+/// Calls expect on the given expression with the given message.
+/// # Examples
+/// ```
+/// # use spellrs::expecto_patronum;
+/// expecto_patronum!(u8::try_from(5), "No Dementors here!");
+/// ```
+/// ```should_panic
+/// # use spellrs::expecto_patronum;
+/// expecto_patronum!(u8::try_from(-5), "Here be Dementors!");
+/// ```
+#[macro_export]
+macro_rules! expecto_patronum {
+    ($danger:expr, $message:literal) => {
+        $danger.expect($message)
+    };
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
