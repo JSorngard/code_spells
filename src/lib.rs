@@ -16,10 +16,24 @@ macro_rules! avada_kedavra {
     };
 }
 
-/// Drops the given variable.
+/// Drops the result of the given expression.
+/// # Examples
+/// Drop the return value of an expression:
+/// ```
+/// # use spellrs::obliviate;
+/// obliviate!(vec![0; 5]);
+/// ```
+/// Drop a variable:
+/// ```compile_fail
+/// # use spellrs::obliviate;
+/// let x = vec![0; 5];
+/// obliviate!(x);
+/// // no longer possible to reference x
+/// println!("{x:?}");
+/// ```
 #[macro_export]
 macro_rules! obliviate {
-    ($memory:ident) => {
+    ($memory:expr) => {
         ::std::mem::drop($memory)
     };
 }
@@ -151,7 +165,7 @@ mod tests {
 
     #[test]
     fn practice_obliviate() {
-        let x = 5;
+        let x = vec![0; 5];
         obliviate!(x);
     }
 
