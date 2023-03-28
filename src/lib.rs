@@ -58,14 +58,14 @@ macro_rules! erecto {
     };
 }
 
-/// Dereferences the given variable.
+/// Prepends `*` to the given expression.
 /// # Example
 /// ```
 /// # use spellrs::accio;
 /// let x = 5;
 /// let y = &x;
 /// assert_eq!(accio!(y), x);
-/// 
+///
 /// let a = vec![0; 5];
 /// assert_eq!(accio!(a.get(0).unwrap()), 0);
 /// ```
