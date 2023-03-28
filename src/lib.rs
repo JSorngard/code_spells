@@ -47,8 +47,22 @@ macro_rules! evanesco {
 /// # Examples
 /// ```
 /// # use spellrs::erecto;
+/// #[derive(Debug, Default, PartialEq)]
+/// struct Thing {
+///     x: u8,
+/// }
+/// 
+/// impl Thing {
+///     fn new(x: u8) -> Self {
+///         Self { x }
+///     }
+/// }
+/// 
 /// assert_eq!(erecto!(u8), 0);
+/// assert_eq!(erecto!(String), String::default());
 /// assert_eq!(erecto!(String:), String::new());
+/// assert_eq!(erecto!(Thing), Thing::default());
+/// assert_eq!(erecto!(Thing: 5), Thing::new(5));
 /// ```
 #[macro_export]
 macro_rules! erecto {
@@ -131,5 +145,6 @@ mod tests {
         assert_eq!(erecto!(Thing: b, x), Thing::new(b, x));
         assert_eq!(erecto!(Thing: 5 != 2, 2_u8.pow(5)), Thing::new(5 != 2, 2_u8.pow(5)));
         assert_eq!(erecto!(Thing: 5 != 2, x), Thing::new(5 != 2, x));
+        assert_eq!(erecto!(String:), String::new());
     }
 }
