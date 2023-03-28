@@ -1,11 +1,11 @@
-/// Loops forever on a sleep (1 sec) call.
+/// Loops forever around a one second [`std::thread::sleep`] call.
 #[macro_export]
 macro_rules! petrificus_totalus {
     () => {
         loop {
             std::thread::sleep(std::time::Duration::from_secs(1))
         }
-    }
+    };
 }
 
 /// Exits the process with error code 1.
@@ -13,31 +13,31 @@ macro_rules! petrificus_totalus {
 macro_rules! avada_kedavra {
     () => {
         std::process::exit(1)
-    }
+    };
 }
 
 /// Drops the given variable.
 #[macro_export]
 macro_rules! obliviate {
     ($memory:ident) => {
-        drop($memory)
-    }
+        std::mem::drop($memory)
+    };
 }
 
 /// Drops the given variable.
 #[macro_export]
 macro_rules! expelliarmus {
     ($item:ident) => {
-        drop($item)
-    }
+        std::mem::drop($item)
+    };
 }
 
 /// Drops the given variable.
 #[macro_export]
 macro_rules! evanesco {
     ($item:ident) => {
-        drop($item)
-    }
+        std::mem::drop($item)
+    };
 }
 
 /// Constructs the given type using either the `default()`
@@ -51,13 +51,13 @@ macro_rules! evanesco {
 /// struct Thing {
 ///     x: u8,
 /// }
-/// 
+///
 /// impl Thing {
 ///     fn new(x: u8) -> Self {
 ///         Self { x }
 ///     }
 /// }
-/// 
+///
 /// assert_eq!(erecto!(u8), 0);
 /// assert_eq!(erecto!(String), String::default());
 /// assert_eq!(erecto!(String:), String::new());
@@ -86,7 +86,7 @@ macro_rules! erecto {
 macro_rules! accio {
     ($x:ident) => {
         *$x
-    }
+    };
 }
 
 #[cfg(test)]
@@ -135,7 +135,11 @@ mod tests {
         }
         impl Thing {
             fn new(b: bool, x: u8) -> Self {
-                Self {b, y4: x, ..Default::default()}
+                Self {
+                    b,
+                    y4: x,
+                    ..Default::default()
+                }
             }
         }
         assert_eq!(erecto!(Thing), Thing::default());
@@ -143,7 +147,10 @@ mod tests {
         let b = true;
         let x = 5;
         assert_eq!(erecto!(Thing: b, x), Thing::new(b, x));
-        assert_eq!(erecto!(Thing: 5 != 2, 2_u8.pow(5)), Thing::new(5 != 2, 2_u8.pow(5)));
+        assert_eq!(
+            erecto!(Thing: 5 != 2, 2_u8.pow(5)),
+            Thing::new(5 != 2, 2_u8.pow(5))
+        );
         assert_eq!(erecto!(Thing: 5 != 2, x), Thing::new(5 != 2, x));
         assert_eq!(erecto!(String:), String::new());
     }
