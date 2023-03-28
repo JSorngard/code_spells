@@ -106,11 +106,12 @@ macro_rules! immobulus {
     };
 }
 
-/// Calls expect on the given expression with the given message.
+/// Calls `expect` on the given expression with the given message.
+/// Calls `unwrap` instead if no message is given.
 /// # Examples
 /// ```
 /// # use spellrs::expecto_patronum;
-/// expecto_patronum!(u8::try_from(5), "No Dementors here!");
+/// expecto_patronum!(u8::try_from(5));
 /// ```
 /// ```should_panic
 /// # use spellrs::expecto_patronum;
@@ -120,6 +121,24 @@ macro_rules! immobulus {
 macro_rules! expecto_patronum {
     ($danger:expr, $message:literal) => {
         $danger.expect($message)
+    };
+    ($danger:expr) => {
+        $danger.unwrap()
+    };
+}
+
+/// Appends `.lock().unwrap()` to the input.
+/// # Example
+/// ```
+/// # use spellrs::colloportus;
+/// use std::sync::Mutex;
+/// let door = Mutex::new(5);
+/// let guard = colloportus!(door);
+/// ```
+#[macro_export]
+macro_rules! colloportus {
+    ($door:ident) => {
+        $door.lock().unwrap()
     };
 }
 
@@ -200,5 +219,16 @@ mod tests {
         let pinned = immobulus!(&mut val);
         let r = std::pin::Pin::into_inner(pinned);
         assert_eq!(*r, 5);
+    }
+
+    #[test]
+    fn practice_expecto_patronum() {
+        expecto_patronum!(u8::try_from(5));
+    }
+
+    #[test]
+    fn practice_colloportus() {
+        let door = std::sync::Mutex::new(5);
+        let _guard = colloportus!(door);
     }
 }
