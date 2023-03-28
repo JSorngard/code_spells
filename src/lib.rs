@@ -1,4 +1,10 @@
 /// Loops forever around a one second [`std::thread::sleep`] call.
+/// # Example
+/// ```no_run
+/// # use spellrs::petrificus_totalus;
+/// petrificus_totalus!();
+/// let a = 5; // This code will never execute, as the thread is paralyzed!
+/// ```
 #[macro_export]
 macro_rules! petrificus_totalus {
     () => {
@@ -8,7 +14,13 @@ macro_rules! petrificus_totalus {
     };
 }
 
-/// Exits the process with error code 1.
+/// Alias for [`std::process::exit`]`(1)`.
+/// # Example
+/// ```no_run
+/// # use spellrs::avada_kedavra;
+/// avada_kedavra!();
+/// let a = 5; // This code will never execute, as the program is dead!
+/// ```
 #[macro_export]
 macro_rules! avada_kedavra {
     () => {
@@ -16,7 +28,7 @@ macro_rules! avada_kedavra {
     };
 }
 
-/// Drops the result of the given expression.
+/// Alias for [`std::mem::drop`].
 /// # Examples
 /// Drop the return value of an expression:
 /// ```
@@ -72,7 +84,7 @@ macro_rules! erecto {
     };
 }
 
-/// Prepends `*` to the given expression in order to dereference it.
+/// Alias for dereferencing.
 /// # Example
 /// ```
 /// # use spellrs::accio;
@@ -90,7 +102,7 @@ macro_rules! accio {
     };
 }
 
-/// Clones the given variable.
+/// Appends `.clone()`.
 /// # Example
 /// ```
 /// # use spellrs::geminio;
@@ -106,14 +118,13 @@ macro_rules! geminio {
     };
 }
 
-/// Returns `Pin::new(input)`.
+/// Alias for [`std::pin::Pin::new`].
 /// # Example
 /// ```
 /// # use spellrs::immobulus;
-/// use std::pin::Pin;
 /// let mut val = 5;
 /// let pinned = immobulus!(&mut val);
-/// let r = Pin::into_inner(pinned);
+/// let r = std::pin::Pin::into_inner(pinned);
 /// assert_eq!(*r, 5);
 /// ```
 #[macro_export]
@@ -123,8 +134,7 @@ macro_rules! immobulus {
     };
 }
 
-/// Calls `expect` on the given expression with the given message.
-/// Calls `unwrap` instead if no message is given.
+/// Appends `.expect(message)` if given a message, otherwise appends `.unwrap()`.
 /// # Examples
 /// ```
 /// # use spellrs::expecto_patronum;
@@ -136,7 +146,7 @@ macro_rules! immobulus {
 /// ```
 #[macro_export]
 macro_rules! expecto_patronum {
-    ($danger:expr, $message:literal) => {
+    ($danger:expr, $message:expr) => {
         $danger.expect($message)
     };
     ($danger:expr) => {
@@ -144,7 +154,7 @@ macro_rules! expecto_patronum {
     };
 }
 
-/// Appends `.lock().unwrap()` to the input.
+/// Appends `.lock().unwrap()`.
 /// # Example
 /// ```
 /// # use spellrs::colloportus;
