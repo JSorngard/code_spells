@@ -42,7 +42,7 @@ macro_rules! evanesco {
 
 /// Constructs the given type using either the `default()`
 /// or `new(<optional args>)` functions.
-/// Calling it with `erecto(type)` results in the former, while
+/// Calling it with `erecto!(type)` results in the former, while
 /// `erecto!(type: <optional args>)` results in the latter.
 /// # Examples
 /// ```
