@@ -74,6 +74,14 @@ macro_rules! accio {
 }
 
 /// Clones the given variable.
+/// # Example
+/// ```
+/// # use spellrs::{geminio, obliviate};
+/// let a = vec![0; 5];
+/// let b = geminio!(a);
+/// obliviate!(a);
+/// assert_eq!(b, vec![0; 5]);
+/// ```
 #[macro_export]
 macro_rules! geminio {
     ($object:ident) => {
