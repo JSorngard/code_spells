@@ -169,7 +169,7 @@ macro_rules! colloportus {
     };
 }
 
-/// Leaks the input. The data is still there, you just can't see it!
+/// Memory leaks the input. The data is still there, you just can't see it!
 /// # Examples
 /// ```no_run
 /// # use spellrs::evanesco;
