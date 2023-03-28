@@ -3,7 +3,7 @@
 macro_rules! petrificus_totalus {
     () => {
         loop {
-            std::thread::sleep(std::time::Duration::from_secs(1))
+            ::std::thread::sleep(::std::time::Duration::from_secs(1))
         }
     };
 }
@@ -12,7 +12,7 @@ macro_rules! petrificus_totalus {
 #[macro_export]
 macro_rules! avada_kedavra {
     () => {
-        std::process::exit(1)
+        ::std::process::exit(1)
     };
 }
 
@@ -20,7 +20,7 @@ macro_rules! avada_kedavra {
 #[macro_export]
 macro_rules! obliviate {
     ($memory:ident) => {
-        std::mem::drop($memory)
+        ::std::mem::drop($memory)
     };
 }
 
@@ -28,7 +28,7 @@ macro_rules! obliviate {
 #[macro_export]
 macro_rules! expelliarmus {
     ($item:ident) => {
-        std::mem::drop($item)
+        ::std::mem::drop($item)
     };
 }
 
@@ -36,7 +36,7 @@ macro_rules! expelliarmus {
 #[macro_export]
 macro_rules! evanesco {
     ($item:ident) => {
-        std::mem::drop($item)
+        ::std::mem::drop($item)
     };
 }
 
@@ -110,7 +110,7 @@ macro_rules! geminio {
 #[macro_export]
 macro_rules! immobulus {
     ($item:expr) => {
-        std::pin::Pin::new($item)
+        ::std::pin::Pin::new($item)
     };
 }
 
