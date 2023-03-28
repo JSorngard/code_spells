@@ -2,6 +2,7 @@
 name = "spellrs"
 version = "0.1.0"
 edition = "2021"
+description = "Aliases some thematically appropriate code snippets to macros named after spells from Harry Potter, so that instead of calling drop(x), you can cast obliviate!(x)"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
