@@ -113,7 +113,7 @@ macro_rules! accio {
 /// ```
 #[macro_export]
 macro_rules! geminio {
-    ($object:ident) => {
+    ($object:expr) => {
         $object.clone()
     };
 }
