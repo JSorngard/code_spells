@@ -65,10 +65,13 @@ macro_rules! erecto {
 /// let x = 5;
 /// let y = &x;
 /// assert_eq!(accio!(y), x);
+/// 
+/// let a = vec![0; 5];
+/// assert_eq!(accio!(a.get(0).unwrap()), 0);
 /// ```
 #[macro_export]
 macro_rules! accio {
-    ($x:ident) => {
+    ($x:expr) => {
         *$x
     };
 }
