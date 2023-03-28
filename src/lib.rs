@@ -1,16 +1,13 @@
-/// Loops forever around a one second [`std::thread::sleep`] call.
+/// Alias for [`std::thread::sleep`].
 /// # Example
-/// ```no_run
+/// ```
 /// # use spellrs::petrificus_totalus;
-/// petrificus_totalus!();
-/// let a = 5; // This code will never execute, as the thread is paralyzed!
+/// petrificus_totalus!(std::time::Duration::from_secs(1));
 /// ```
 #[macro_export]
 macro_rules! petrificus_totalus {
-    () => {
-        loop {
-            ::std::thread::sleep(::std::time::Duration::from_secs(1))
-        }
+    ($duration:expr) => {
+        ::std::thread::sleep($duration)
     };
 }
 
@@ -188,7 +185,7 @@ macro_rules! colloportus {
 macro_rules! evanesco {
     ($item:expr) => {
         ::std::mem::drop(::std::boxed::Box::new($item).leak())
-    }
+    };
 }
 
 #[cfg(test)]
