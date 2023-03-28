@@ -89,6 +89,14 @@ macro_rules! accio {
     };
 }
 
+/// Clones the given variable.
+#[macro_export]
+macro_rules! geminio {
+    ($object:ident) => {
+        $object.clone()
+    };
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -153,5 +161,14 @@ mod tests {
         );
         assert_eq!(erecto!(Thing: 5 != 2, x), Thing::new(5 != 2, x));
         assert_eq!(erecto!(String:), String::new());
+    }
+
+    #[test]
+    fn practice_geminio() {
+        let a = vec![0; 5];
+        let b = geminio!(a);
+        assert_eq!(a, b);
+        drop(a);
+        assert_eq!(b, vec![0; 5]);
     }
 }
