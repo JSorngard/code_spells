@@ -72,7 +72,7 @@ macro_rules! erecto {
     };
 }
 
-/// Prepends `*` to the given expression.
+/// Prepends `*` to the given expression in order to dereference it.
 /// # Example
 /// ```
 /// # use spellrs::accio;
