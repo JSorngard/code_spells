@@ -79,10 +79,10 @@ macro_rules! accio {
 /// Clones the given variable.
 /// # Example
 /// ```
-/// # use spellrs::{geminio, obliviate};
+/// # use spellrs::geminio;
 /// let a = vec![0; 5];
 /// let b = geminio!(a);
-/// obliviate!(a);
+/// drop(a);
 /// assert_eq!(b, vec![0; 5]);
 /// ```
 #[macro_export]
