@@ -97,6 +97,23 @@ macro_rules! geminio {
     };
 }
 
+/// Returns `Pin::new(input)`.
+/// # Example
+/// ```
+/// # use spellrs::immobulus;
+/// use std::pin::Pin;
+/// let mut val = 5;
+/// let pinned = immobulus!(&mut val);
+/// let r = Pin::into_inner(pinned);
+/// assert_eq!(*r, 5);
+/// ```
+#[macro_export]
+macro_rules! immobulus {
+    ($item:expr) => {
+        std::pin::Pin::new($item)
+    };
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -170,5 +187,13 @@ mod tests {
         assert_eq!(a, b);
         drop(a);
         assert_eq!(b, vec![0; 5]);
+    }
+
+    #[test]
+    fn practice_immobulus() {
+        let mut val = 5;
+        let pinned = immobulus!(&mut val);
+        let r = std::pin::Pin::into_inner(pinned);
+        assert_eq!(*r, 5);
     }
 }
