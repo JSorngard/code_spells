@@ -2,9 +2,10 @@
 //! With this crate you can live your wizard dreams right in your source code.
 //! It aliases some common (and some less common) code snippets to macros
 //! named after thematically appropriate spells from Harry Potter.
-//! ```rust
+//! ```
+//! # use code_spells::{accio, erecto, obliviate, expecto_patronum, geminio};
 //! let v1 = vec![erecto!(i32); 5];
-//! let v2 = geminio!(v1);
+//! let mut v2 = geminio!(v1);
 //! obliviate!(v1);
 //! accio!(expecto_patronum!(v2.get_mut(0), "Dementors B-gone!")) = 5;
 //! ```
