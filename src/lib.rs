@@ -6,7 +6,7 @@
 /// Alias for [`std::thread::sleep`].
 /// # Example
 /// ```
-/// # use spellrs::petrificus_totalus;
+/// # use code_spells::petrificus_totalus;
 /// petrificus_totalus!(std::time::Duration::from_secs(1));
 /// ```
 #[macro_export]
@@ -19,7 +19,7 @@ macro_rules! petrificus_totalus {
 /// Alias for [`std::process::exit`]`(1)`.
 /// # Example
 /// ```no_run
-/// # use spellrs::avada_kedavra;
+/// # use code_spells::avada_kedavra;
 /// avada_kedavra!();
 /// let a = 5; // This code will never execute, as the program is dead!
 /// ```
@@ -34,12 +34,12 @@ macro_rules! avada_kedavra {
 /// # Examples
 /// Drop the return value of an expression:
 /// ```
-/// # use spellrs::obliviate;
+/// # use code_spells::obliviate;
 /// obliviate!(vec![0; 5]);
 /// ```
 /// Drop a variable:
 /// ```compile_fail
-/// # use spellrs::obliviate;
+/// # use code_spells::obliviate;
 /// let x = vec![0; 5];
 /// obliviate!(x);
 /// // no longer possible to reference x
@@ -58,7 +58,7 @@ macro_rules! obliviate {
 /// `erecto!(type: <optional args>)` results in the latter.
 /// # Examples
 /// ```
-/// # use spellrs::erecto;
+/// # use code_spells::erecto;
 /// #[derive(Debug, Default, PartialEq)]
 /// struct Thing {
 ///     x: u8,
@@ -89,7 +89,7 @@ macro_rules! erecto {
 /// Alias for dereferencing.
 /// # Example
 /// ```
-/// # use spellrs::accio;
+/// # use code_spells::accio;
 /// let x = 5;
 /// let y = &x;
 /// assert_eq!(accio!(y), x);
@@ -107,7 +107,7 @@ macro_rules! accio {
 /// Appends `.clone()`.
 /// # Example
 /// ```
-/// # use spellrs::geminio;
+/// # use code_spells::geminio;
 /// let a = vec![0; 5];
 /// let b = geminio!(a);
 /// drop(a);
@@ -123,7 +123,7 @@ macro_rules! geminio {
 /// Alias for [`std::pin::Pin::new`].
 /// # Example
 /// ```
-/// # use spellrs::immobulus;
+/// # use code_spells::immobulus;
 /// let mut val = 5;
 /// let pinned = immobulus!(&mut val);
 /// let r = std::pin::Pin::into_inner(pinned);
@@ -139,11 +139,11 @@ macro_rules! immobulus {
 /// Appends `.expect(message)` if given a message, otherwise appends `.unwrap()`.
 /// # Examples
 /// ```
-/// # use spellrs::expecto_patronum;
+/// # use code_spells::expecto_patronum;
 /// expecto_patronum!(u8::try_from(5));
 /// ```
 /// ```should_panic
-/// # use spellrs::expecto_patronum;
+/// # use code_spells::expecto_patronum;
 /// expecto_patronum!(u8::try_from(-5), "Here be Dementors!");
 /// ```
 #[macro_export]
@@ -159,7 +159,7 @@ macro_rules! expecto_patronum {
 /// Appends `.lock().unwrap()`.
 /// # Example
 /// ```
-/// # use spellrs::colloportus;
+/// # use code_spells::colloportus;
 /// use std::sync::Mutex;
 /// let door = Mutex::new(5);
 /// let guard = colloportus!(door);
@@ -174,14 +174,14 @@ macro_rules! colloportus {
 /// Memory leaks the input. The data is still there, you just can't see it!
 /// # Examples
 /// ```no_run
-/// # use spellrs::evanesco;
+/// # use code_spells::evanesco;
 /// let ostrich = vec![5; 100];
 /// // What do you have there?
 /// evanesco!(ostrich);
 /// // A smoothie..?
 /// ```
 /// ```compile_fail
-/// # use spellrs::evanesco;
+/// # use code_spells::evanesco;
 /// let a = vec![5; 100];
 /// evanesco!(a);
 /// println!("{a:?}");
