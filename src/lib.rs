@@ -1,3 +1,8 @@
+//! Do you think Rust macros are a bit like magic? I do too!
+//! With this crate you can live your wizard dreams right in your source code.
+//! It aliases some common (and some less common) code snippets to macros
+//! named after thematically appropriate spells from Harry Potter.
+
 /// Alias for [`std::thread::sleep`].
 /// # Example
 /// ```
