@@ -23,7 +23,7 @@ macro_rules! petrificus_totalus {
     };
 }
 
-/// Alias for [`panic!`](panic).
+/// Alias for [`panic!`].
 /// # Example
 /// ```no_run
 /// # use code_spells::avada_kedavra;
@@ -195,7 +195,7 @@ macro_rules! colloportus {
 /// // A smoothie..?
 /// ```
 /// Using [`Box::from_raw`](std::boxed::Box::from_raw) is one way of getting the item back.
-/// This crate allows that function to be cast with [aparecium!](aparecium).
+/// This crate allows that function to be cast with [aparecium!].
 /// ```
 /// # use code_spells::{evanesco, aparecium};
 /// let a: &mut Vec<i32> = evanesco!(Box::new(vec![5; 100]));
