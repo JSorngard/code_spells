@@ -173,7 +173,7 @@ macro_rules! expecto_patronum {
 /// ```
 #[macro_export]
 macro_rules! colloportus {
-    ($door:ident) => {
+    ($door:expr) => {
         ::std::sync::Mutex::lock(&$door).unwrap()
     };
 }
@@ -219,7 +219,7 @@ macro_rules! evanesco {
 /// ```
 #[macro_export]
 macro_rules! aparecium {
-    ($item:ident) => {
+    ($item:expr) => {
         ::std::boxed::Box::from_raw($item)
     };
 }
