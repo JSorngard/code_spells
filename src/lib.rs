@@ -3,7 +3,7 @@
 //! With this crate you can live your wizard dreams right in your source code.
 //! It aliases some common (and some less common) code snippets to macros
 //! named after thematically appropriate spells from Harry Potter.
-//! 
+//!
 //! This enables you to cast [`geminio!(item)`](geminio) instead of forcing you to call [`item.clone()`](core::clone::Clone::clone).
 //! ```
 //! # use code_spells::{accio, erecto, obliviate, expecto_patronum, geminio};
@@ -321,6 +321,27 @@ macro_rules! unforgivable {
     };
 }
 
+/// Alias for [`Vec::reserve()`](std::vec::Vec::reserve).
+/// # Example
+/// ```
+/// # use code_spells::capacious_extremis;
+/// let mut police_box = Vec::<i32>::new();
+/// capacious_extremis!(&mut police_box, 5);
+/// assert!(police_box.capacity() >= 5);
+/// let r = &mut police_box;
+/// capacious_extremis!(r, 10);
+/// assert!(police_box.capacity() >= 10);
+/// ```
+#[macro_export]
+macro_rules! capacious_extremis {
+    (&mut $vec:ident, $capacity:expr) => {
+        ::std::vec::Vec::reserve(&mut $vec, $capacity)
+    };
+    ($vec:ident, $capacity:expr) => {
+        ::std::vec::Vec::reserve($vec, $capacity)
+    };
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -435,5 +456,14 @@ mod tests {
         assert_eq!(reparo!(foo(255), u8::MAX), u8::MAX);
         assert_eq!(reparo!(foo(255), |_| 5), 5);
         assert_eq!(reparo!(foo(255), |_| identity(10)), 10);
+    }
+
+    #[test]
+    fn practice_capacious_extremis() {
+        let mut a = Vec::<i32>::new();
+        let b = &mut a;
+        capacious_extremis!(b, 5);
+        capacious_extremis!(&mut a, 10);
+        assert!(a.capacity() >= 10);
     }
 }
