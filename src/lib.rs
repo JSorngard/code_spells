@@ -41,7 +41,7 @@ macro_rules! avada_kedavra {
     };
 }
 
-/// Alias for [`Drop::drop`](std::mem::drop).
+/// Alias for [`Drop::drop`](core::mem::drop).
 /// # Examples
 /// Drop the return value of an expression:
 /// ```
@@ -59,7 +59,7 @@ macro_rules! avada_kedavra {
 #[macro_export]
 macro_rules! obliviate {
     ($memory:expr) => {
-        ::std::mem::drop($memory)
+        ::core::mem::drop($memory)
     };
 }
 
