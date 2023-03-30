@@ -304,10 +304,8 @@ macro_rules! reparo {
 /// # use code_spells::unforgivable;
 /// use core::num::NonZeroU8;
 /// // Forgivability: `new_unchecked` is UB if the argument is zero, but two is not zero.
-/// const two: NonZeroU8 = unforgivable! {
-///     const ONE: u8 = 1;
-///     NonZeroU8::new_unchecked(ONE + ONE)
-/// };
+/// const two: NonZeroU8 = unforgivable! { NonZeroU8::new_unchecked(2) };
+/// assert_eq!(two.get(), 2);
 /// ```
 #[macro_export]
 macro_rules! unforgivable {
