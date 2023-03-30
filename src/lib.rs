@@ -298,7 +298,7 @@ macro_rules! reparo {
     };
 }
 
-/// Alias for unsafe. What could be more unforgivable than unsafe code?
+/// Alias for unsafe. What could be more unforgivable than undefined behaviour?
 /// # Example
 /// ```
 /// # use code_spells::unforgivable;
