@@ -246,9 +246,9 @@ macro_rules! sonorous {
     };
 }
 
-/// Alias for [`Result::unwrap_or()`](std::result::Result::unwrap_or) and [`Result::unwrap_or_else()`](std::result::Result::unwrap_or_else).
-/// Automatically chooses [`unwrap_or_else()`](std::result::Result::unwrap_or_else) if given a closure,
-/// and [`unwrap_or()`](std::result::Result::unwrap_or) if given an expression that is not a closure.
+/// Alias for [`Result::unwrap_or()`](core::result::Result::unwrap_or) and [`Result::unwrap_or_else()`](core::result::Result::unwrap_or_else).
+/// Automatically chooses [`unwrap_or_else()`](core::result::Result::unwrap_or_else) if given a closure,
+/// and [`unwrap_or()`](core::result::Result::unwrap_or) if given an expression that is not a closure.
 /// # Example
 /// ```
 /// # use code_spells::reparo;
@@ -291,13 +291,13 @@ macro_rules! sonorous {
 #[macro_export]
 macro_rules! reparo {
     ($result:expr, move |$arg_name:pat_param| $body:expr) => {
-        ::std::result::Result::unwrap_or_else($result, move |$arg_name| $body)
+        ::core::result::Result::unwrap_or_else($result, move |$arg_name| $body)
     };
     ($result:expr, |$arg_name:pat_param| $body:expr) => {
-        ::std::result::Result::unwrap_or_else($result, |$arg_name| $body)
+        ::core::result::Result::unwrap_or_else($result, |$arg_name| $body)
     };
     ($result:expr, $alt:expr) => {
-        ::std::result::Result::unwrap_or($result, $alt)
+        ::core::result::Result::unwrap_or($result, $alt)
     };
 }
 
