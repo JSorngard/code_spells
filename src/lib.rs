@@ -200,6 +200,22 @@ macro_rules! evanesco {
     };
 }
 
+/// Alias for [`println!`].
+/// # Example
+/// ```
+/// # use code_spells::sonorous;
+/// sonorous!("Hello, World!");
+/// sonorous!("{} chocolate", "dark");
+/// let a = 1 + 1;
+/// sonorous!("{a} is not {}", 5);
+/// ```
+#[macro_export]
+macro_rules! sonorous {
+    ($($arg:tt)*) => {
+        println!($($arg)*)
+    };
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
