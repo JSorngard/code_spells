@@ -243,6 +243,62 @@ macro_rules! sonorous {
     };
 }
 
+/// Alias for [`Result::unwrap_or()`](std::result::Result::unwrap_or) and [`Result::unwrap_or_else()`](std::result::Result::unwrap_or_else).
+/// Automatically chooses [`unwrap_or_else()`](std::result::Result::unwrap_or_else) if given a closure,
+/// and [`unwrap_or()`](std::result::Result::unwrap_or) if given an expression that is not a closure.
+/// # Example
+/// ```
+/// # use code_spells::reparo;
+/// fn foo(x: u8) -> Result<u8, u8> {
+///     if x < 125 {
+///         Ok(x)
+///     } else {
+///         Err(x)
+///     }
+/// }
+/// let five = 5;
+/// assert_eq!(reparo!(foo(5), five), 5); // unwrap_or
+/// assert_eq!(reparo!(foo(255), u8::MAX), u8::MAX); // unwrap_or
+/// assert_eq!(reparo!(foo(255), |_| 5), 5); // unwrap_or_else
+/// let primes = vec![2, 3, 5];
+/// assert_eq!(reparo!(foo(255), move |_| primes.into_iter().sum()), 10); // unwrap_or_else
+/// ```
+/// # Note
+/// If the second argument is the name of a function this macro will not work.
+/// To get around this you can put a call to the function in a closure: `reparo!(foo(x), |_| func())`.
+/// ```compile_fail
+/// # use code_spells::reparo;
+/// # fn foo(x: u8) -> Result<u8, u8> {if x < 125 { Ok(x) } else { Err(x) } }
+/// fn ten() -> u8 { 10 }
+/// assert_eq!(reparo!(foo(255), ten), 10);
+/// ```
+/// We can make it work by converting the function to a closure
+/// ```
+/// # use code_spells::reparo;
+/// # fn foo(x: u8) -> Result<u8, u8> {if x < 125 { Ok(x) } else { Err(x) } }
+/// # fn ten() -> u8 { 10 }
+/// assert_eq!(reparo!(foo(255), |_| ten()), 10); // uses unwrap_or_else
+/// ```
+/// or by calling the function in the macro.
+/// ```
+/// # use code_spells::reparo;
+/// # fn foo(x: u8) -> Result<u8, u8> {if x < 125 { Ok(x) } else { Err(x) } }
+/// # fn ten() -> u8 { 10 }
+/// assert_eq!(reparo!(foo(255), ten()), 10); // uses unwrap_or
+/// ```
+#[macro_export]
+macro_rules! reparo {
+    ($result:expr, move |$arg_name:pat_param| $body:expr) => {
+        ::std::result::Result::unwrap_or_else($result, move |$arg_name| $body)
+    };
+    ($result:expr, |$arg_name:pat_param| $body:expr) => {
+        ::std::result::Result::unwrap_or_else($result, |$arg_name| $body)
+    };
+    ($result:expr, $alt:expr) => {
+        ::std::result::Result::unwrap_or($result, $alt)
+    };
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -338,5 +394,24 @@ mod tests {
         let a = Box::new(vec![5; 100]);
         let b: &mut Vec<i32> = evanesco!(a);
         assert_eq!(unsafe { aparecium!(b) }, Box::new(vec![5; 100]));
+    }
+
+    #[test]
+    fn practice_reparo() {
+        fn foo(x: u8) -> Result<u8, u8> {
+            if x < 125 {
+                Ok(x)
+            } else {
+                Err(x)
+            }
+        }
+        let five = 5;
+        fn identity(x: u8) -> u8 {
+            x
+        }
+        assert_eq!(reparo!(foo(5), five), 5);
+        assert_eq!(reparo!(foo(255), u8::MAX), u8::MAX);
+        assert_eq!(reparo!(foo(255), |_| 5), 5);
+        assert_eq!(reparo!(foo(255), |_| identity(10)), 10);
     }
 }
