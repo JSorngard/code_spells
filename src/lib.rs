@@ -12,7 +12,8 @@
 //! obliviate!(v1);
 //! accio!(expecto_patronum!(v2.get_mut(0), "Dementors B-gone!")) = 5;
 //! ```
-//! Also aliases `unsafe` to the macro [`unforgivable!`](unforgivable), because what could be more unforgivable than undefined behaviour?
+//! Also aliases `unsafe` to the macro [`unforgivable!`](unforgivable),
+//! because what could be more unforgivable than undefined behaviour?  
 
 /// Alias for [`std::thread::sleep`](std::thread::sleep).
 /// # Example
@@ -339,6 +340,26 @@ macro_rules! capacious_extremis {
     };
     ($vec:ident, $capacity:expr) => {
         ::std::vec::Vec::reserve($vec, $capacity)
+    };
+}
+
+/// Alias for [`mem::transmute()`](core::mem::transmute).
+/// # Examples
+/// ```
+/// # use code_spells::vera_verto;
+/// let a = [0_u8; 4];
+/// let b: u32 = unsafe { vera_verto!(a) };
+/// assert_eq!(b, 0);
+/// let c = unsafe { vera_verto!(b, u32 => [u8; 4]) };
+/// assert_eq!(c, [0; 4]);
+/// ```
+#[macro_export]
+macro_rules! vera_verto {
+    ($object:expr) => {
+        ::core::mem::transmute($object)
+    };
+    ($object:expr, $src:ty => $dst:ty) => {
+        ::core::mem::transmute::<$src, $dst>($object)
     };
 }
 
