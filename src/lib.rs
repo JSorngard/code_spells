@@ -31,7 +31,7 @@ macro_rules! petrificus_totalus {
 /// # Example
 /// ```no_run
 /// # use code_spells::avada_kedavra;
-/// avada_kedavra!("No!");
+/// avada_kedavra!("Lily Potter");
 /// let lily_potter = "continue"; // This code will never execute, as the program is dead!
 /// ```
 #[macro_export]
