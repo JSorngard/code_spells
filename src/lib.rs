@@ -163,7 +163,7 @@ macro_rules! expecto_patronum {
     };
 }
 
-/// Appends `.lock().unwrap()`.
+/// Alias for [`std::sync::Mutex::lock`]`(&input).unwrap()`.
 /// # Example
 /// ```
 /// # use code_spells::colloportus;
@@ -174,7 +174,7 @@ macro_rules! expecto_patronum {
 #[macro_export]
 macro_rules! colloportus {
     ($door:ident) => {
-        $door.lock().unwrap()
+        ::std::sync::Mutex::lock(&$door).unwrap()
     };
 }
 
