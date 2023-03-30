@@ -127,7 +127,7 @@ macro_rules! geminio {
     };
 }
 
-/// Alias for [`std::pin::Pin::new`].
+/// Alias for [`Pin::new`](std::pin::Pin::new).
 /// # Example
 /// ```
 /// # use code_spells::immobulus;
