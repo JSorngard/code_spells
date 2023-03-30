@@ -265,7 +265,6 @@ macro_rules! sonorous {
 /// ```
 /// # Note
 /// If the second argument is the name of a function this macro will not work.
-/// To get around this you can put a call to the function in a closure: `reparo!(foo(x), |_| func())`.
 /// ```compile_fail
 /// # use code_spells::reparo;
 /// # fn foo(x: u8) -> Result<u8, u8> {if x < 125 { Ok(x) } else { Err(x) } }
