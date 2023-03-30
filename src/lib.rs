@@ -9,6 +9,7 @@
 //! obliviate!(v1);
 //! accio!(expecto_patronum!(v2.get_mut(0), "Dementors B-gone!")) = 5;
 //! ```
+//! Also aliases unsafe to the macro [`unforgivable!`](unforgivable), because what could be more unfogivable than undefined behaviour?
 
 /// Alias for [`thread::sleep`](std::thread::sleep).
 /// # Example
@@ -178,7 +179,7 @@ macro_rules! colloportus {
     };
 }
 
-/// Alias for [`Box::leak`](std::boxed::Box::leak). The item is still there, it's just invisible. Can be revealed with [aparecium!].
+/// Alias for [`Box::leak`](std::boxed::Box::leak). The item is still there, it's just invisible. Can be revealed with [`aparecium!`](aparecium).
 /// # Examples
 /// If the returned pointer is dropped this causes a memory leak. You forgot where you put it, and it's invisible.
 /// ```compile_fail
@@ -208,7 +209,7 @@ macro_rules! evanesco {
     };
 }
 
-/// Alias for [`Box::from_raw`](std::boxed::Box::from_raw). Useful if you have made something invisible with [evanesco!](evanesco).
+/// Alias for [`Box::from_raw`](std::boxed::Box::from_raw). Useful if you have made something invisible with [`evanesco!`](evanesco).
 /// This is unsafe as revealing something invisible might not be what the invisible thing wants,
 /// and it might attack you and cause undefined behaviour.
 /// # Example
