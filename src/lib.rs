@@ -178,7 +178,7 @@ macro_rules! colloportus {
     };
 }
 
-/// Alias for [`Box::leak`](std::boxed::Box::leak). The item is still there, it's just harder to see.
+/// Alias for [`Box::leak`](std::boxed::Box::leak). The item is still there, it's just invisible. Can be revealed with [aparecium!].
 /// # Examples
 /// If the returned pointer is dropped this causes a memory leak. You forgot where you put it, and it's invisible.
 /// ```compile_fail
