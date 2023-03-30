@@ -1,7 +1,7 @@
 # code-spells
 Do you think Rust macros are a bit like magic? I do too!  
-This crate aliases some common (and some less common) code snippets to macros with thematically appropriate names.  
-E.g. the `drop` function can now be invoked with `obliviate!`, `Pin::new(&mut x)` can now be written as `immobulus!(&mut x)`, and if you want protection from harmful dementors the crate lets you cast `expecto_patronum!(expr, "message")` instead of calling `expr.expect("message")`.
+This crate aliases some common (and some less common) code snippets to macros named after thematically appropriate spells from Harry Potter.  
+E.g. the `drop` function can now be cast with `obliviate!`, `Pin::new()` with `immobulus!`, and if you want protection from harmful dementors this crate lets you cast `expecto_patronum!(expr, "message")` instead of calling `expr.expect("message")`.
 
 ```rust
 let v1 = vec![erecto!(i32); 5];
