@@ -5,7 +5,7 @@ E.g. the `drop` function can now be invoked with `obliviate!`, `Pin::new(&mut x)
 
 ```rust
 let v1 = vec![erecto!(i32); 5];
-let mut v2 = geminio!(v1);
+let mut v2 = geminio!(&v1);
 obliviate!(v1);
 accio!(expecto_patronum!(v2.get_mut(0), "Dementors B-gone!")) = 5;
 ```

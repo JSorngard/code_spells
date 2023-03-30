@@ -5,12 +5,12 @@
 //! ```
 //! # use code_spells::{accio, erecto, obliviate, expecto_patronum, geminio};
 //! let v1 = vec![erecto!(i32); 5];
-//! let mut v2 = geminio!(v1);
+//! let mut v2 = geminio!(&v1);
 //! obliviate!(v1);
 //! accio!(expecto_patronum!(v2.get_mut(0), "Dementors B-gone!")) = 5;
 //! ```
 
-/// Alias for [`std::thread::sleep`].
+/// Alias for [`thread::sleep`](std::thread::sleep).
 /// # Example
 /// ```
 /// # use code_spells::petrificus_totalus;
@@ -37,7 +37,7 @@ macro_rules! avada_kedavra {
     };
 }
 
-/// Alias for [`std::mem::drop`].
+/// Alias for [`drop`](std::mem::drop).
 /// # Examples
 /// Drop the return value of an expression:
 /// ```
@@ -111,19 +111,19 @@ macro_rules! accio {
     };
 }
 
-/// Alias for [`std::clone::Clone::clone`]`(&input)`.
+/// Alias for [`Clone::clone()`](std::clone::Clone::clone).
 /// # Example
 /// ```
 /// # use code_spells::geminio;
 /// let a = vec![0; 5];
-/// let b = geminio!(a);
+/// let b = geminio!(&a);
 /// drop(a);
 /// assert_eq!(b, vec![0; 5]);
 /// ```
 #[macro_export]
 macro_rules! geminio {
     ($object:expr) => {
-        ::std::clone::Clone::clone(&$object)
+        ::std::clone::Clone::clone($object)
     };
 }
 
@@ -308,7 +308,7 @@ mod tests {
     #[test]
     fn practice_geminio() {
         let a = vec![0; 5];
-        let b = geminio!(a);
+        let b = geminio!(&a);
         assert_eq!(a, b);
         drop(a);
         assert_eq!(b, vec![0; 5]);
