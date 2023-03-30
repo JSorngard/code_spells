@@ -136,7 +136,7 @@ macro_rules! geminio {
 /// # use code_spells::immobulus;
 /// let mut val = 5;
 /// let pinned = immobulus!(&mut val);
-/// let r = std::pin::Pin::into_inner(pinned);
+/// let r = core::pin::Pin::into_inner(pinned);
 /// assert_eq!(*r, 5);
 /// ```
 #[macro_export]
