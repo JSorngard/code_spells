@@ -114,7 +114,7 @@ macro_rules! accio {
     };
 }
 
-/// Alias for [`Clone::clone()`](std::clone::Clone::clone).
+/// Alias for [`Clone::clone()`](core::clone::Clone::clone).
 /// # Example
 /// ```
 /// # use code_spells::geminio;
@@ -126,7 +126,7 @@ macro_rules! accio {
 #[macro_export]
 macro_rules! geminio {
     ($object:expr) => {
-        ::std::clone::Clone::clone($object)
+        ::core::clone::Clone::clone($object)
     };
 }
 
