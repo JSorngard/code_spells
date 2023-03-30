@@ -14,7 +14,7 @@
 //! ```
 //! Also aliases `unsafe` to the macro [`unforgivable!`](unforgivable), because what could be more unforgivable than undefined behaviour?
 
-/// Alias for [`thread::sleep`](std::thread::sleep).
+/// Alias for [`std::thread::sleep`](std::thread::sleep).
 /// # Example
 /// ```
 /// # use code_spells::petrificus_totalus;
