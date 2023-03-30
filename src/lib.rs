@@ -178,25 +178,49 @@ macro_rules! colloportus {
     };
 }
 
-/// Memory leaks the input. The data is still there, you just can't see it!
+/// Alias for [`Box::leak`](std::boxed::Box::leak). The item is still there, it's just harder to see.
 /// # Examples
+/// If the returned pointer is dropped this causes a memory leak. You forgot where you put it, and it's invisible.
+/// ```compile_fail
+/// # use code_spells::evanesco;
+/// let a = Box::new(vec![5; 100]);
+/// evanesco!(a);
+/// println!("{a:?}");
+/// ```
 /// ```no_run
 /// # use code_spells::evanesco;
-/// let ostrich = vec![5; 100];
+/// let ostrich = Box::new(vec![5; 100]);
 /// // What do you have there?
 /// evanesco!(ostrich);
 /// // A smoothie..?
 /// ```
-/// ```compile_fail
-/// # use code_spells::evanesco;
-/// let a = vec![5; 100];
-/// evanesco!(a);
-/// println!("{a:?}");
+/// Using [`Box::from_raw`](std::boxed::Box::from_raw) is one way of getting the item back.
+/// This crate allows that function to be cast with [aparecium!](aparecium).
+/// ```
+/// # use code_spells::{evanesco, aparecium};
+/// let a: &mut Vec<i32> = evanesco!(Box::new(vec![5; 100]));
+/// assert_eq!(unsafe { aparecium!(a) }, Box::new(vec![5; 100]));
 /// ```
 #[macro_export]
 macro_rules! evanesco {
     ($item:expr) => {
-        ::std::mem::drop(::std::boxed::Box::new($item).leak())
+        ::std::boxed::Box::leak($item)
+    };
+}
+
+/// Alias for [`Box::from_raw`](std::boxed::Box::from_raw). Useful if you have made something invisible with [evanesco!](evanesco).
+/// This is unsafe as revealing something invisible might not be what the invisible thing wants,
+/// and it might attack you and cause undefined behaviour.
+/// # Example
+/// ```
+/// # use code_spells::{evanesco, aparecium};
+/// let a: &mut Vec<i32> = evanesco!(Box::new(vec![5; 100]));
+/// assert_eq!(unsafe { aparecium!(a) }, Box::new(vec![5; 100]));
+/// ```
+#[macro_export]
+macro_rules! aparecium {
+    ($item:ident) => {
+        ::std::boxed::Box::from_raw($item)
     };
 }
 
@@ -304,5 +328,12 @@ mod tests {
     fn practice_colloportus() {
         let door = std::sync::Mutex::new(5);
         let _guard = colloportus!(door);
+    }
+
+    #[test]
+    fn practice_evanesco_and_apericium() {
+        let a = Box::new(vec![5; 100]);
+        let b: &mut Vec<i32> = evanesco!(a);
+        assert_eq!(unsafe { aparecium!(b) }, Box::new(vec![5; 100]));
     }
 }
