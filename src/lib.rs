@@ -64,7 +64,7 @@ macro_rules! obliviate {
     };
 }
 
-/// Constructs the given type using either the [`Default::default()`](core::default::Default::default)
+/// Constructs the given type using either the [`Default::default`](core::default::Default::default)
 /// or `new(<optional args>)` functions.
 /// Calling it with `erecto!(type)` results in the former, while
 /// `erecto!(type: <optional args>)` results in the latter.
@@ -117,7 +117,7 @@ macro_rules! accio {
     };
 }
 
-/// Alias for [`Clone::clone()`](core::clone::Clone::clone).
+/// Alias for [`Clone::clone`](core::clone::Clone::clone).
 /// # Example
 /// ```
 /// # use code_spells::geminio;
@@ -169,7 +169,7 @@ macro_rules! expecto_patronum {
     };
 }
 
-/// Alias for [`Mutex::lock()`](std::sync::Mutex::lock).
+/// Alias for [`Mutex::lock`](std::sync::Mutex::lock).
 /// # Example
 /// ```
 /// # use code_spells::colloportus;
@@ -249,9 +249,9 @@ macro_rules! sonorous {
     };
 }
 
-/// Alias for [`Result::unwrap_or()`](core::result::Result::unwrap_or) and [`Result::unwrap_or_else()`](core::result::Result::unwrap_or_else).
-/// Automatically chooses [`unwrap_or_else()`](core::result::Result::unwrap_or_else) if given a closure,
-/// and [`unwrap_or()`](core::result::Result::unwrap_or) if given an expression that is not a closure.
+/// Alias for [`Result::unwrap_or`](core::result::Result::unwrap_or) and [`Result::unwrap_or_else`](core::result::Result::unwrap_or_else).
+/// Automatically chooses [`unwrap_or_else`](core::result::Result::unwrap_or_else) if given a closure,
+/// and [`unwrap_or`](core::result::Result::unwrap_or) if given an expression that is not a closure.
 /// # Example
 /// ```
 /// # use code_spells::reparo;
@@ -322,7 +322,7 @@ macro_rules! unforgivable {
     };
 }
 
-/// Alias for [`Vec::reserve()`](std::vec::Vec::reserve).
+/// Alias for [`Vec::reserve`](std::vec::Vec::reserve).
 /// # Example
 /// ```
 /// # use code_spells::capacious_extremis;
@@ -343,7 +343,8 @@ macro_rules! capacious_extremis {
     };
 }
 
-/// Alias for [`mem::transmute()`](core::mem::transmute).
+/// Alias for [`mem::transmute`](core::mem::transmute).
+/// In the land of Rust this is less safe than [`avada_kedavra!`](avada_kedavra), see the documentation of [`mem::transmute`](core::mem::transmute) for more information.
 /// # Examples
 /// ```
 /// # use code_spells::vera_verto;
@@ -486,5 +487,14 @@ mod tests {
         capacious_extremis!(b, 5);
         capacious_extremis!(&mut a, 10);
         assert!(a.capacity() >= 10);
+    }
+
+    #[test]
+    fn practice_vera_verto() {
+        let a = [0_u8; 4];
+        let b: u32 = unsafe { vera_verto!(a) };
+        assert_eq!(b, 0);
+        let c = unsafe { vera_verto!(b, u32 => [u8; 4]) };
+        assert_eq!(c, [0; 4]);
     }
 }
