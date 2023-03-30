@@ -10,7 +10,7 @@
 //! obliviate!(v1);
 //! accio!(expecto_patronum!(v2.get_mut(0), "Dementors B-gone!")) = 5;
 //! ```
-//! Also aliases unsafe to the macro [`unforgivable!`](unforgivable), because what could be more unforgivable than undefined behaviour?
+//! Also aliases `unsafe` to the macro [`unforgivable!`](unforgivable), because what could be more unforgivable than undefined behaviour?
 
 /// Alias for [`thread::sleep`](std::thread::sleep).
 /// # Example
