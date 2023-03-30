@@ -63,7 +63,7 @@ macro_rules! obliviate {
     };
 }
 
-/// Constructs the given type using either the [`Default::default()`](std::default::Default::default)
+/// Constructs the given type using either the [`Default::default()`](core::default::Default::default)
 /// or `new(<optional args>)` functions.
 /// Calling it with `erecto!(type)` results in the former, while
 /// `erecto!(type: <optional args>)` results in the latter.
@@ -90,7 +90,7 @@ macro_rules! obliviate {
 #[macro_export]
 macro_rules! erecto {
     ($t:ty) => {
-        <$t as ::std::default::Default>::default()
+        <$t as ::core::default::Default>::default()
     };
     ($t:ty: $($arg:expr),*) => {
         <$t>::new( $($arg,)* )
