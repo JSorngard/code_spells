@@ -4,7 +4,7 @@
 //! It aliases some common (and some less common) code snippets to macros
 //! named after thematically appropriate spells from Harry Potter.
 //! 
-//! This enables you to cast `geminio!` instead of forcing you to call `clone`.
+//! This enables you to cast [`geminio!(item)`](geminio) instead of forcing you to call [`item.clone()`](core::clone::Clone::clone).
 //! ```
 //! # use code_spells::{accio, erecto, obliviate, expecto_patronum, geminio};
 //! let v1 = vec![erecto!(i32); 5];
@@ -41,7 +41,7 @@ macro_rules! avada_kedavra {
     };
 }
 
-/// Alias for [`drop`](std::mem::drop).
+/// Alias for [`Drop::drop`](std::mem::drop).
 /// # Examples
 /// Drop the return value of an expression:
 /// ```
