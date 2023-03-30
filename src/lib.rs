@@ -1,5 +1,5 @@
 //! Do you think Rust macros are a bit like magic? I do too!
-//! 
+//!
 //! With this crate you can live your wizard dreams right in your source code.
 //! It aliases some common (and some less common) code snippets to macros
 //! named after thematically appropriate spells from Harry Potter.
@@ -95,7 +95,8 @@ macro_rules! erecto {
     };
 }
 
-/// Alias for dereferencing.
+/// Alias for dereferencing. This does not use the [`Deref`](core::ops::Deref) or [`DerefMut`](core::ops::DerefMut) traits,
+/// but prepends `*` to the start of the given expression.
 /// # Example
 /// ```
 /// # use code_spells::accio;
@@ -211,7 +212,7 @@ macro_rules! evanesco {
 }
 
 /// Alias for [`Box::from_raw`](std::boxed::Box::from_raw). Useful if you have made something invisible with [`evanesco!`](evanesco).
-/// This is unsafe as revealing something invisible might not be what the invisible thing wants,
+/// This is `unsafe` as revealing something invisible might not be what the invisible thing wants,
 /// and it might attack you and cause undefined behaviour.
 /// # Example
 /// ```
