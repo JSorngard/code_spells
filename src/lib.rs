@@ -130,7 +130,7 @@ macro_rules! geminio {
     };
 }
 
-/// Alias for [`Pin::new`](std::pin::Pin::new).
+/// Alias for [`Pin::new`](core::pin::Pin::new).
 /// # Example
 /// ```
 /// # use code_spells::immobulus;
@@ -142,7 +142,7 @@ macro_rules! geminio {
 #[macro_export]
 macro_rules! immobulus {
     ($item:expr) => {
-        ::std::pin::Pin::new($item)
+        ::core::pin::Pin::new($item)
     };
 }
 
