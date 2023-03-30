@@ -3,6 +3,8 @@
 //! With this crate you can live your wizard dreams right in your source code.
 //! It aliases some common (and some less common) code snippets to macros
 //! named after thematically appropriate spells from Harry Potter.
+//! 
+//! This enables you to cast `geminio!` instead of forcing you to call `clone`.
 //! ```
 //! # use code_spells::{accio, erecto, obliviate, expecto_patronum, geminio};
 //! let v1 = vec![erecto!(i32); 5];
