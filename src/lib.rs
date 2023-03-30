@@ -163,18 +163,18 @@ macro_rules! expecto_patronum {
     };
 }
 
-/// Alias for [`std::sync::Mutex::lock`]`(&input).unwrap()`.
+/// Alias for [`Mutex::lock()`](std::sync::Mutex::lock).
 /// # Example
 /// ```
 /// # use code_spells::colloportus;
 /// use std::sync::Mutex;
 /// let door = Mutex::new(5);
-/// let guard = colloportus!(door);
+/// let guard_result = colloportus!(&door);
 /// ```
 #[macro_export]
 macro_rules! colloportus {
     ($door:expr) => {
-        ::std::sync::Mutex::lock(&$door).unwrap()
+        ::std::sync::Mutex::lock($door)
     };
 }
 
@@ -330,7 +330,7 @@ mod tests {
     #[test]
     fn practice_colloportus() {
         let door = std::sync::Mutex::new(5);
-        let _guard = colloportus!(door);
+        let _guard = colloportus!(&door);
     }
 
     #[test]
