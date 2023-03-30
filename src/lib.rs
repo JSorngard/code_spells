@@ -303,7 +303,7 @@ macro_rules! reparo {
 /// ```
 /// # use code_spells::unforgivable;
 /// use core::num::NonZeroU8;
-/// // Safety: `new_unchecked` is UB if the argument is zero, but two is not zero.
+/// // Forgivability: `new_unchecked` is UB if the argument is zero, but two is not zero.
 /// const two: NonZeroU8 = unforgivable! {
 ///     const ONE: u8 = 1;
 ///     NonZeroU8::new_unchecked(ONE + ONE)
