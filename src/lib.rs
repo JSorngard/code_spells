@@ -23,17 +23,17 @@ macro_rules! petrificus_totalus {
     };
 }
 
-/// Alias for [`std::process::exit`]`(1)`.
+/// Alias for [`panic!`](panic).
 /// # Example
 /// ```no_run
 /// # use code_spells::avada_kedavra;
-/// avada_kedavra!();
-/// let a = 5; // This code will never execute, as the program is dead!
+/// avada_kedavra!("No!");
+/// let lily_potter = "continue"; // This code will never execute, as the program is dead!
 /// ```
 #[macro_export]
 macro_rules! avada_kedavra {
-    () => {
-        ::std::process::exit(1)
+    ($($arg:tt)*) => {
+        panic!($($arg)*)
     };
 }
 
@@ -235,6 +235,9 @@ macro_rules! aparecium {
 /// ```
 #[macro_export]
 macro_rules! sonorous {
+    () => {
+        print!("\n")
+    };
     ($($arg:tt)*) => {
         println!($($arg)*)
     };
