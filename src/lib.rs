@@ -343,24 +343,43 @@ macro_rules! capacious_extremis {
     };
 }
 
-/// Alias for [`mem::transmute`](core::mem::transmute).
-/// In the land of Rust this is less safe than [`avada_kedavra!`](avada_kedavra), see the documentation of [`mem::transmute`](core::mem::transmute) for more information.
+/// Alias for [`mem::transmute`](core::mem::transmute). Disregard the rules, force the type system to do what you want!
+/// # Safety
+/// This spell is unforgivable for a reason, see the documentation of [`mem::transmute`](core::mem::transmute) for more details.
 /// # Examples
 /// ```
-/// # use code_spells::vera_verto;
+/// # use code_spells::{imperio, unforgivable};
 /// let a = [0_u8; 4];
-/// let b: u32 = unsafe { vera_verto!(a) };
+/// let b: u32 = unforgivable! { imperio!(a) };
 /// assert_eq!(b, 0);
-/// let c = unsafe { vera_verto!(b, u32 => [u8; 4]) };
+/// let mut c = unforgivable! { imperio!(b, u32 => [u8; 4]) };
 /// assert_eq!(c, [0; 4]);
+/// let d = &mut c;
+/// assert_eq!(unforgivable! { imperio!(d, &mut [u8; 4] => &[u8; 4]) }, &c)
+/// ```
+/// Force a pointer to become a function pointer!
+/// ```
+/// # use code_spells::{imperio, unforgivable};
+/// fn foo() -> i32 { 0 }
+/// let pointer = foo as *const ();
+/// let function = unforgivable! {
+///     imperio!(pointer, *const () => fn() -> i32)
+/// };
+/// assert_eq!(function(), 0);
 /// ```
 #[macro_export]
-macro_rules! vera_verto {
-    ($object:expr) => {
-        ::core::mem::transmute($object)
+macro_rules! imperio {
+    // Elision
+    ($will:expr) => {
+        ::core::mem::transmute($will)
     };
-    ($object:expr, $src:ty => $dst:ty) => {
-        ::core::mem::transmute::<$src, $dst>($object)
+    // Pure type to type
+    ($will:expr, $src:ty => $dst:ty) => {
+        ::core::mem::transmute::<$src, $dst>($will)
+    };
+    // Attempt to match against any expression
+    ($will:expr, $src:expr => $dst:expr) => {
+        ::core::mem::transmute::<$src, $dst>($will)
     };
 }
 
@@ -490,11 +509,11 @@ mod tests {
     }
 
     #[test]
-    fn practice_vera_verto() {
+    fn practice_imperio() {
         let a = [0_u8; 4];
-        let b: u32 = unsafe { vera_verto!(a) };
+        let b: u32 = unforgivable! { imperio!(a) };
         assert_eq!(b, 0);
-        let c = unsafe { vera_verto!(b, u32 => [u8; 4]) };
+        let c = unforgivable! { imperio!(b, u32 => [u8; 4]) };
         assert_eq!(c, [0; 4]);
     }
 }
