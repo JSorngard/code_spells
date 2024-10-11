@@ -11,5 +11,9 @@ accio!(expecto_patronum!(v2.get_mut(0), "Dementors B-gone!")) = 5;
 ```
 Also aliases `unsafe` to the macro `unforgivable!`, because what could be more unforgivable than undefined behaviour?
 
-# Related crates
+## Related crates
 [expecto-patronum](https://crates.io/crates/expecto-patronum)
+
+## Name handover
+
+Since this crate is just a joke, if you have an idea for an actually useful crate for which you want this name, contact the author at the email in the `Cargo.toml`.
