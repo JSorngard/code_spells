@@ -2,9 +2,10 @@
 name = "code-spells"
 authors = ["Johanna Sörngård <jsorngard@gmail,´.com>"]
 version = "0.2.3"
-edition = "2021"
+edition = "2018"
 description = "Aliases some common (and less common) code snippets to macros named after thematically appropriate spells from Harry Potter, so that instead of calling drop(x), you can cast obliviate!(x)"
 license = "MIT"
 repository = "https://github.com/JSorngard/code_spells/"
 categories = ["rust-patterns"]
 keywords = ["code-spells", "macros-are-magic"]
+rust-version = "1.53.0"
