@@ -153,10 +153,12 @@ macro_rules! immobulus {
 /// # Examples
 /// ```
 /// # use code_spells::expecto_patronum;
+/// # use std::convert::TryFrom;
 /// expecto_patronum!(u8::try_from(5));
 /// ```
 /// ```should_panic
 /// # use code_spells::expecto_patronum;
+/// # use std::convert::TryFrom;
 /// expecto_patronum!(u8::try_from(-5), "Here be Dementors!");
 /// ```
 #[macro_export]
@@ -386,6 +388,7 @@ macro_rules! imperio {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::convert::TryFrom;
 
     #[test]
     fn practice_obliviate() {
