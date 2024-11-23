@@ -1,7 +1,7 @@
 [package]
 name = "code-spells"
 authors = ["Johanna Sörngård <jsorngard@gmail,´.com>"]
-version = "0.2.3"
+version = "0.2.4"
 edition = "2018"
 description = "Aliases some common (and less common) code snippets to macros named after thematically appropriate spells from Harry Potter, so that instead of calling drop(x), you can cast obliviate!(x)"
 license = "MIT OR Apache-2.0"
