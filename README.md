@@ -17,3 +17,20 @@ Also aliases `unsafe` to the macro `unforgivable!`, because what could be more u
 ## Name handover
 
 Since this crate is just a joke, if you have an idea for an actually useful crate for which you want this name, contact the author at the email in the `Cargo.toml`.
+
+<br>
+
+### License
+
+<sup>
+Licensed under either of <a href="LICENSE-APACHE">Apache License, Version
+2.0</a> or <a href="LICENSE-MIT">MIT license</a> at your option.
+</sup>
+
+<br>
+
+<sub>
+Unless you explicitly state otherwise, any contribution intentionally submitted
+for inclusion in the work by you, as defined in the Apache-2.0 license, shall be
+dual licensed as above, without any additional terms or conditions.
+</sub>
